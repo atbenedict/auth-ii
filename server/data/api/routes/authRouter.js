@@ -36,7 +36,6 @@ router.post("/login", (req, res) => {
     .loginUser(creds)
     .then(user => {
       if (user && bcrypt.compareSync(creds.password, user.password)) {
-        req.session.user = user;
         res.status(200).json({ message: `Welcome Aboard ${user.username}!` });
       } else {
         res.status(401).json({ message: "no Bueno" });
@@ -48,25 +47,11 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  if (req.session) {
-    req.session.destroy(err => {
-      if (err) {
-        res.send("wow you are stuck");
-      } else {
-        res.send("toodles");
-      }
-    });
-  } else {
-    res.end();
-  }
+  res.end();
 });
 
 function restricted(req, res, next) {
-  if (req.session && req.session.user) {
-    next();
-  } else {
-    res.status(401).json({ message: "You shall not pass!" });
-  }
+  next();
 }
 
 module.exports = router;
