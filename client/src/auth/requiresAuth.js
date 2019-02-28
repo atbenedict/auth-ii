@@ -1,11 +1,11 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 // axios defaults and interceptors
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = "http://localhost:5000/api";
 axios.interceptors.request.use(
   function(options) {
-    options.headers.authorization = localStorage.getItem('jwt');
+    options.headers.authorization = localStorage.getItem("jwt");
 
     return options;
   },
@@ -18,8 +18,8 @@ axios.interceptors.request.use(
 export default function(Component) {
   return class Authenticated extends React.Component {
     render() {
-      const token = localStorage.getItem('jwt');
-      const notLoggedIn = <div>Please login to see the users</div>;
+      const token = localStorage.getItem("jwt");
+      const notLoggedIn = <div>Please login or register to see the users</div>;
 
       return <> {token ? <Component {...this.props} /> : notLoggedIn} </>;
     }
