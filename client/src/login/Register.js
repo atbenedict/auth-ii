@@ -1,4 +1,4 @@
-import React from "react";
+import React from "reactn";
 import axios from "axios";
 
 class Register extends React.Component {

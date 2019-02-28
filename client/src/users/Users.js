@@ -1,11 +1,11 @@
-import React from 'react';
-import axios from 'axios';
+import React from "reactn";
+import axios from "axios";
 
-import requiresAuth from '../auth/requiresAuth';
+import requiresAuth from "../auth/requiresAuth";
 
 class Users extends React.Component {
   state = {
-    users: [],
+    users: []
   };
 
   render() {
@@ -22,7 +22,7 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/users').then(res => {
+    axios.get("/users").then(res => {
       this.setState({ users: res.data.users });
     });
   }
